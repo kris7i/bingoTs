@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use Usual\Functions;
+use Tools\Usual;
 
-echo Functions::world();
+echo Usual::world();
