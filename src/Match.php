@@ -48,10 +48,12 @@ class Match
         }
         return false;
     }
+    
     /**
      * [isImage 此扩展名是否是图片]
-     * @author limx
-     * @param $ext 扩展名
+     * @param $name
+     * @param array $lib
+     * @return bool
      */
     public static function isImage($name, $lib = [])
     {
