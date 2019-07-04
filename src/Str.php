@@ -556,32 +556,6 @@ class Str
     }
 
 
-    /**
-     * UTF8字符串加密
-     * @param string $string
-     * @return string
-     */
-    public static function encode($string)
-    {
-        list($chars, $length) = ['', strlen($string = iconv('utf-8', 'gbk', $string))];
-        for ($i = 0; $i < $length; $i++) {
-            $chars .= str_pad(base_convert(ord($string[$i]), 10, 36), 2, 0, 0);
-        }
-        return $chars;
-    }
 
-    /**
-     * UTF8字符串解密
-     * @param string $string
-     * @return string
-     */
-    public static function decode($string)
-    {
-        $chars = '';
-        foreach (str_split($string, 2) as $char) {
-            $chars .= chr(intval(base_convert($char, 36, 10)));
-        }
-        return iconv('gbk', 'utf-8', $chars);
-    }
 
 }

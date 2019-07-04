@@ -274,4 +274,20 @@ class Time
             return $posttime;
         }
     }
+    /**
+     * [isleap 是否是闰年]
+     * @desc
+     * @author limx
+     * @param null $time 时间戳、DateTime时间字符串
+     * @return bool
+     */
+    public static function isleap($time = NULL)
+    {
+        empty($time) && $time = time();
+        is_string($time) && $time = strtotime($time);
+        $year = date('Y', $time);
+        if ($year % 400 === 0) return true;
+        if ($year % 4 === 0 && $year % 100 !== 0) return true;
+        return false;
+    }
 }
