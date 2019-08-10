@@ -28,12 +28,12 @@ class Time
         $t = time() - $time;
         $f = [
             '31536000' => '年',
-            '2592000'  => '个月',
-            '604800'   => '星期',
-            '86400'    => '天',
-            '3600'     => '小时',
-            '60'       => '分钟',
-            '1'        => '秒',
+            '2592000' => '个月',
+            '604800' => '星期',
+            '86400' => '天',
+            '3600' => '小时',
+            '60' => '分钟',
+            '1' => '秒',
         ];
         foreach ($f as $k => $v) {
             if (0 != $c = floor($t / (int)$k)) {
@@ -85,9 +85,9 @@ class Time
      * [!!] A list of time zones that PHP supports can be found at
      * <http://php.net/timezones>.
      *
-     * @param   string $remote timezone that to find the offset of
-     * @param   string $local timezone used as the baseline
-     * @param   mixed $now UNIX timestamp or date string
+     * @param string $remote timezone that to find the offset of
+     * @param string $local timezone used as the baseline
+     * @param mixed $now UNIX timestamp or date string
      * @return  integer
      */
     public static function offset($remote, $local = null, $now = null)
@@ -117,9 +117,9 @@ class Time
      * $span = self::span(60, 182, 'minutes,seconds'); // array('minutes' => 2, 'seconds' => 2)
      * $span = self::span(60, 182, 'minutes'); // 2
      *
-     * @param   int $remote timestamp to find the span of
-     * @param   int $local timestamp to use as the baseline
-     * @param   string $output formatting string
+     * @param int $remote timestamp to find the span of
+     * @param int $local timestamp to use as the baseline
+     * @param string $output formatting string
      * @return  string   when only a single output is requested
      * @return  array    associative list of all outputs requested
      * @from https://github.com/kohana/ohanzee-helpers/blob/master/src/Date.php
@@ -242,44 +242,46 @@ class Time
      * @param $posttime 时间：2017-08-12 18:18:18
      * @return string
      */
-    public static function time_ago($posttime){
+    public static function time_ago($posttime)
+    {
         //当前时间的时间戳
-        $nowtimes = strtotime(date('Y-m-d H:i:s'),time());
+        $nowtimes = strtotime(date('Y-m-d H:i:s'), time());
         //之前时间参数的时间戳
         $posttimes = strtotime($posttime);
         //相差时间戳
         $counttime = $nowtimes - $posttimes;
         //进行时间转换
-        if($counttime<=10){
+        if ($counttime <= 10) {
             return '刚刚';
-        }else if($counttime>10 && $counttime<=30){
+        } else if ($counttime > 10 && $counttime <= 30) {
             return '刚才';
-        }else if($counttime>30 && $counttime<=60){
+        } else if ($counttime > 30 && $counttime <= 60) {
             return '刚一会';
-        }else if($counttime>60 && $counttime<=120){
+        } else if ($counttime > 60 && $counttime <= 120) {
             return '1分钟前';
-        }else if($counttime>120 && $counttime<=180){
+        } else if ($counttime > 120 && $counttime <= 180) {
             return '2分钟前';
-        }else if($counttime>180 && $counttime<3600){
-            return intval(($counttime/60)).'分钟前';
-        }else if($counttime>=3600 && $counttime<3600*24){
-            return intval(($counttime/3600)).'小时前';
-        }else if($counttime>=3600*24 && $counttime<3600*24*2){
+        } else if ($counttime > 180 && $counttime < 3600) {
+            return intval(($counttime / 60)) . '分钟前';
+        } else if ($counttime >= 3600 && $counttime < 3600 * 24) {
+            return intval(($counttime / 3600)) . '小时前';
+        } else if ($counttime >= 3600 * 24 && $counttime < 3600 * 24 * 2) {
             return '昨天';
-        }else if($counttime>=3600*24*2 && $counttime<3600*24*3){
+        } else if ($counttime >= 3600 * 24 * 2 && $counttime < 3600 * 24 * 3) {
             return '前天';
-        }else if($counttime>=3600*24*3 && $counttime<=3600*24*20){
-            return intval(($counttime/(3600*24))).'天前';
-        }else{
+        } else if ($counttime >= 3600 * 24 * 3 && $counttime <= 3600 * 24 * 20) {
+            return intval(($counttime / (3600 * 24))) . '天前';
+        } else {
             return $posttime;
         }
     }
+
     /**
      * [isleap 是否是闰年]
      * @desc
-     * @author limx
      * @param null $time 时间戳、DateTime时间字符串
      * @return bool
+     * @author limx
      */
     public static function isleap($time = NULL)
     {
@@ -289,5 +291,15 @@ class Time
         if ($year % 400 === 0) return true;
         if ($year % 4 === 0 && $year % 100 !== 0) return true;
         return false;
+    }
+
+    /**
+     * 根据生日计算年龄
+     * @param $birthday ['生日的时间戳:阳历']
+     * return 年龄正整数
+     */
+    function clalculateAgeByBirthday($birthday)
+    {
+        return floor((strtotime(date('Y-m-d')) - $birthday) / 3600 / 24 / 365);
     }
 }

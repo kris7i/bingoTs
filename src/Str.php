@@ -500,10 +500,10 @@ class Str
 
     /**
      * 字符串加密、解密函数
-     * @param    string $txt 字符串
-     * @param    string $operation ENCODE为加密，DECODE为解密，可选参数，默认为ENCODE，
-     * @param    string $key 密钥：数字、字母、下划线
-     * @param    string $expiry 过期时间
+     * @param string $txt 字符串
+     * @param string $operation ENCODE为加密，DECODE为解密，可选参数，默认为ENCODE，
+     * @param string $key 密钥：数字、字母、下划线
+     * @param string $expiry 过期时间
      * @return    string
      */
     public static function sysAuth($string, $operation = 'ENCODE', $key = '', $expiry = 0)
@@ -555,7 +555,15 @@ class Str
         }
     }
 
-
+    /**
+     * 手机号加*
+     * @param $phone ['原始手机号']
+     * @return mixed
+     */
+    function wrapPhone($phone)
+    {
+        return substr_replace($phone, '****', 3, 4);
+    }
 
 
 }
